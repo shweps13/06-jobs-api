@@ -12,6 +12,10 @@ const errorHandlerMiddleware = (err, req, res, next) => {
     return res.status(StatusCodes.BAD_REQUEST).json({ msg })
   }
 
+  if (err?.name === 'CastError') {
+    return res.status(StatusCodes.BAD_REQUEST).json({ msg: 'Invalid id' })
+  }
+
   return res
     .status(StatusCodes.INTERNAL_SERVER_ERROR)
     .json({ msg: 'Something went wrong, please try again' })
