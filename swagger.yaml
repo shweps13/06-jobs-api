@@ -1,0 +1,141 @@
+openapi: 3.0.0
+info:
+  title: CTD-job-api
+  description: ''
+  version: 1.0.0
+servers:
+  - url: https://jobs-api-7k7m.onrender.com/api/v1
+  - url: http://localhost:3000/api/v1
+paths:
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: Register
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: barsik
+                email: joe@ololo.com
+                password: ololo-passwd
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Login
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: joe@ololo.com
+                password: ololo-passwd
+  /jobs:
+    post:
+      tags:
+        - Jobs
+      summary: Create Job
+      description: ''
+      security:
+        - bearerAuth: []
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                company: facebook
+                position: developer
+    get:
+      tags:
+        - Jobs
+      summary: Get All Jobs
+      description: ''
+      security:
+        - bearerAuth: []
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+  /jobs/{id}:
+    get:
+      tags:
+        - Jobs
+      summary: Get Job
+      description: ''
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+    patch:
+      tags:
+        - Jobs
+      summary: Upd Job
+      description: ''
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                company: netflixx
+                position: front-end developer
+    delete:
+      tags:
+        - Jobs
+      summary: Delete Job
+      description: ''
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+components:
+  schemas: {}
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
